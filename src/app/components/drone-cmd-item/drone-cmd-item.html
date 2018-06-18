@@ -1,0 +1,6 @@
+<mat-list-item>
+  <mat-icon mat-list-icon>{{ this.objAction.actionIconName }}</mat-icon>
+  <h5 mat-line>{{ this.objAction | RecentCommand }}</h5>
+  <action-btn ActionCode="REPEAT" Color="accent" [pRepeatAt]="this.objAction.commandHIndex"></action-btn>
+</mat-list-item>
+<mat-divider></mat-divider>

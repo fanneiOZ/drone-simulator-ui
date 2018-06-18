@@ -1,0 +1,25 @@
+<div [formGroup]="form">
+  <h3 mat-dialog-title>This Client ID is :</h3>
+  <h1 mat-dialog-title color="accent"><strong>{{ this.aService.ClientID }}</strong></h1>
+
+
+  <div mat-dialog-content>
+    <h3 mat-dialog-title>
+      To remote drone on other client:
+    </h3>
+    <mat-form-field>
+      <mat-select placeholder="Remote to client ..." formControlName="remoteClientID" color="accent">
+        <mat-option [value]="null">None</mat-option>
+        <mat-option *ngFor="let client of this.aService.connectedClients" [value]="client.clientID">
+          {{ client.clientID }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+  </div>
+  <div mat-dialog-actions>
+    <button class="mat-raised-button mat-primary" mat-button (click)="save()" cdkFocusInitial>Connect</button>
+    <button class="mat-raised-button" mat-button (click)="close()" cdkFocusInitial>Cancel</button>
+  </div>
+</div>
+

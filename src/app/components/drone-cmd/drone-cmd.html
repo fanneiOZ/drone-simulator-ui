@@ -1,0 +1,7 @@
+<mat-list dense>
+  
+  <ng-container *ngFor="let act of this.aStack ">
+    <cmd-item [pAction]="act" *ngIf="act.commandHIndex"></cmd-item>
+  </ng-container>
+</mat-list>
+

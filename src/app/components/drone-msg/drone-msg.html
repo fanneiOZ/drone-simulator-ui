@@ -1,0 +1,6 @@
+<mat-list>
+  <ng-container *ngFor="let act of (ActionStack.reverse())">
+    <msg-item [pAction]="act"></msg-item>
+  </ng-container>  
+</mat-list>
+

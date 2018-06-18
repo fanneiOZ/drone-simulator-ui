@@ -1,0 +1,6 @@
+<mat-list-item>
+  <mat-icon mat-list-icon>{{ this.objAction.actionIconName }}</mat-icon>
+  <h3 mat-line><strong>{{ this.objAction | formatMessage | uppercase }}</strong></h3>
+  <p mat-line>{{ wsMsg }}</p>
+  <p mat-line>{{ this.objAction.currentPos | DronePosition }}</p>
+</mat-list-item>

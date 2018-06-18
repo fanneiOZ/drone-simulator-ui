@@ -1,0 +1,31 @@
+<div  [formGroup]="form">
+  <h3 mat-dialog-title>Place at ...</h3>
+
+  <div mat-dialog-content>
+    <mat-form-field>
+      <input matInput
+             placeholder="Value of X-Axis"
+             formControlName="x">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput
+             placeholder="Value of Y-Axis"
+             formControlName="y">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-select placeholder="Heading direction" formControlName="direction">
+        <mat-option *ngFor="let direction of selectDirectionValue" [value]="direction.value">
+          {{ direction.viewValue }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!--<mat-form-field>
+    <input matInput [(ngModel)]="data.x">
+  </mat-form-field>-->
+  </div>
+  <div mat-dialog-actions>
+    <button class="mat-raised-button mat-primary" mat-button  (click)="save()" cdkFocusInitial>Ok</button>
+  </div>
+</div>
+
