@@ -42,8 +42,7 @@ export class SocketService {
   }
 
   connectToWebSocket(): Observable<any> {
-    //this.ws = new WebSocket("ws://dronesimulatorws.azurewebsites.net");
-    this.ws = new WebSocket("ws://localhost:8085");
+    this.ws = new WebSocket("ws://dronesimulatorws.azurewebsites.net");
 
     return new Observable(observer => {
       this.ws.onmessage = (event) => observer.next(event.data);
