@@ -8,6 +8,6 @@ import { iconAction } from '../../common/mapping';
   styleUrls: ['./toolbar.css']
 })
 export class ToolbarComponent {
-  constructor(private aService: ActionService) {
+  constructor(public aService: ActionService) {
   }
 }

@@ -14,7 +14,7 @@ export class DialogRemoteComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private aService: ActionService,
+    public aService: ActionService,
     private dialogRef: MatDialogRef<DialogRemoteComponent>) {
     
   }

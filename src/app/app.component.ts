@@ -1,6 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { SocketService } from './services/SocketService';
-import { ActionService, Action } from './services/ActionService';
+import { ActionService } from './services/ActionService';
 
 @Component({
   selector: 'app-root',
@@ -9,7 +8,6 @@ import { ActionService, Action } from './services/ActionService';
 })
 export class AppComponent {
 
-  constructor( private wSocket: SocketService
-              ,private aService: ActionService) {
+  constructor(public aService: ActionService) {
   }
 }

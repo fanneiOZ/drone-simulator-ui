@@ -8,7 +8,7 @@ import { ReversePipe } from 'ngx-pipes';
   , providers: [ReversePipe]
 })
 export class CommandListComponent implements OnInit {
-  private aStack: Array<Action>;
+  aStack: Array<Action>;
 
   ngOnInit() {
 
