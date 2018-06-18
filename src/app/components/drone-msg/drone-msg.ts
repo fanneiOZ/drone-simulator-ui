@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Action, ActionService } from '../../services/ActionService';
-import { SocketService } from '../../services/SocketService';
+import { ReversePipe } from 'ngx-pipes';
 
 @Component({
   selector: 'msg-list',
   templateUrl: './drone-msg.html'
+  , providers: [ReversePipe]
 })
 export class MessageListComponent implements OnInit {
   ActionStack: Array<Action>;
@@ -13,12 +14,12 @@ export class MessageListComponent implements OnInit {
   ngOnInit() {
     this.aService.castedActionStack.subscribe(
       x => {
-        this.ActionStack = x;
+        this.ActionStack = this.reversePipe.transform(x);
       }
     );
   }
 
-  constructor(private wSocket: SocketService, private aService: ActionService) {
+  constructor(private aService: ActionService, private reversePipe: ReversePipe) {
 
   }
 }
