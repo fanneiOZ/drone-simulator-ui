@@ -10,4 +10,12 @@ export class AppComponent {
 
   constructor(public aService: ActionService) {
   }
+
+  checkRecentCommand(): boolean {
+    
+    if (this.aService.ActionStack.filter(x => x.commandHIndex).length > 1)
+      return true
+    else 
+      return false;
+  }
 }

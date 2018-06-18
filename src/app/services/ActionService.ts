@@ -44,6 +44,8 @@ export class ActionService  {
 
   public connectedClients: any;
   public isRemoting: boolean = false;
+  public isBeingRemoted: boolean = false;
+  public requestClientID: string = '';
   public remotingClientID: string = '';
 
   constructor(private _wSocket: SocketService, private dialog: MatDialog) {
@@ -52,13 +54,16 @@ export class ActionService  {
       data => {
         if (this._wSocket.isClientIDRetrieved) {
           let parseData = JSON.parse(data);
-          if (parseData.reqResult == -3) this.onRemoteClientedDisconnect();
 
-          else if (parseData.reqResult != -2) {
+               if (parseData.reqResult == -3) this.onRemoteClientedDisconnect();
+          else if (parseData.reqResult == -4) this.pingpongRemoting(parseData.res.clientID);
+          else if (parseData.reqResult == -5) this.pingpongRemoting();
+          else if (parseData.reqResult > -2) {
+            console.log(data);
             this.parseResponseToAction(parseData);
             this.broadcastActionStack();
           }
-          else {
+          else if (parseData.reqResult != -99) {
             this.parseConnectedClientsList(parseData);
             return;
           }
@@ -82,6 +87,11 @@ export class ActionService  {
         this.dialog.open(DialogDisconnectComponent, dialogConfig);
       }
     );
+  }
+
+  pingpongRemoting(requestingClientID?: string) {
+    this.isBeingRemoted = requestingClientID ? true: false;
+    this.requestClientID = requestingClientID? requestingClientID : '';
   }
 
   onRemoteClientedDisconnect() {
@@ -120,8 +130,12 @@ export class ActionService  {
 
     if (data.res.drone) {
 
+      if (!data.res.drone.Owner) {
+        newAction.commandHIndex = this.ActionStack.filter(x => x.commandHIndex).length + 1;
+      }
+
       if (!data.res.drone.Owner && newAction.result == 1) {
-        newAction.commandHIndex = this.ActionStack.filter(x => x.commandHIndex).length + 2;
+
 
         if (newAction.commandAction == ActionCode.Place) {
           let x = data.res.drone.Position[0];
@@ -161,6 +175,7 @@ export class ActionService  {
     req = this._wSocket.cmdRequestFactory(action.commandInput, cmdArg, ClientID);
 
     let actionMessage = this._wSocket.createRequestJSON(req);
+    console.log(actionMessage);
     this._wSocket.sendMessage(actionMessage);
   }
 

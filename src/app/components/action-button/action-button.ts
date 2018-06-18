@@ -80,8 +80,20 @@ export class ActionButtonComponent implements OnInit {
     
   }
   stopRemote() {
-    this.aService.isRemoting = false;
-    this.aService.remotingClientID = '';
+    if (this.aService.isRemoting) {
+      let req = { Command: 'exitremote', ClientID: this.aService.remotingClientID };
+      this.wSocket.sendMessage(JSON.stringify(req));
+
+      this.aService.remotingClientID = '';
+      this.aService.isRemoting = false;
+
+    } else if (this.aService.isBeingRemoted) {
+
+      let req = { Command: 'cancelremote', ClientID: this.aService.requestClientID };
+      this.wSocket.sendMessage(JSON.stringify(req));
+      this.aService.isBeingRemoted = false;
+      this.aService.remotingClientID = '';
+    }
   }
   openRemoteDialog(): any {
     let req = { Command: 'remote' };
@@ -96,6 +108,9 @@ export class ActionButtonComponent implements OnInit {
     dialogRef.afterClosed().subscribe(
       result => {
         if (result) {
+          let req = { Command: 'enterremote', ClientID: result.remoteClientID };
+          this.wSocket.sendMessage(JSON.stringify(req));
+
           this.aService.remotingClientID = result.remoteClientID;
           this.aService.isRemoting = true;
         }

@@ -6,7 +6,8 @@ enum messageLabel {
   Left = 'Rotated left from %direction-1% to %direction%',
   Right = 'Rotated right from %direction+1% to %direction%',
   Place = 'Placed at (%x%,%y%) %direction%',
-  Create = 'Created & placed at (3,3) north'
+  Create = 'Created & placed at (3,3) north',
+  Undefined = 'Send command to drone'
 }
 
 @Pipe({
@@ -52,6 +53,9 @@ export class FormatMessagePipe implements PipeTransform {
               .replace('%direction%', value.cmdArg.direction);
           } else { command = ActionCode.Place; }
           break;
+        default:
+          command = messageLabel.Undefined
+
       }
     }
 

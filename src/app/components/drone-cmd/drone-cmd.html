@@ -1,7 +1,7 @@
 <mat-list dense>
   
   <ng-container *ngFor="let act of this.aStack ">
-    <cmd-item [pAction]="act" *ngIf="act.commandHIndex"></cmd-item>
+    <cmd-item [pAction]="act" *ngIf="act.commandHIndex && act.result == 1"></cmd-item>
   </ng-container>
 </mat-list>
 

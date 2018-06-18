@@ -1,9 +1,9 @@
-<div fxLayout="column">
+<div fxLayout="column" fxFlex>
   <mat-toolbar color="primary">
     <mat-icon>android</mat-icon>
     <h1><b>&nbsp;Drone Simulator</b></h1>
     <span class="toolbar-spacer"></span>
-    <action-btn ActionCode="REMOTE" *ngIf="!this.aService.isRemoting"></action-btn>
+    <action-btn ActionCode="REMOTE" *ngIf="!this.aService.isRemoting && !this.aService.isBeingRemoted"></action-btn>
   </mat-toolbar>
 
 </div>

@@ -1,29 +1,37 @@
 <div fxLayout="column" fxFlexFill>
-  <div fxFlex>
+  <div fxLayout="column">
     <appToolBar></appToolBar>
   </div>
   <div fxFlex="85%" fxLayout="column">
-    <mat-toolbar fxFlex="8%" color="accent" *ngIf="this.aService.isRemoting" >
-      <h4>&nbsp;Remoting ..<b>{{ this.aService.remotingClientID }}</b></h4>
+    <mat-toolbar fxFlex="8%" color="accent" *ngIf="this.aService.isRemoting">
+      <h4>&nbsp;Remoting to&nbsp;<b>{{ this.aService.remotingClientID }}</b></h4>
       <span class="toolbar-spacer"></span>
-      <action-btn ActionCode="REMOTE"></action-btn>
       <action-btn ActionCode="STOPREMOTE"></action-btn>
     </mat-toolbar>
-    <div fxLayout="row" fxLayout.xs="column" fxFlex>
+    <mat-toolbar fxFlex="8%" *ngIf="this.aService.isBeingRemoted" style="background-color: orange;">
+      <h4>&nbsp;Remoting by&nbsp;<b>{{ this.aService.requestClientID }}</b></h4>
+      <span class="toolbar-spacer"></span>
+      <action-btn ActionCode="STOPREMOTE"></action-btn>
+    </mat-toolbar>
+    <div fxLayout="row" fxLayout.lt-sm="column" fxFlex>
       <div fxFlex fxFlex.xs style="overflow: auto">
         <msg-list></msg-list>
       </div>
-      <cmd-panel fxFlex="30%" *ngIf="!this.aService.isRemoting"></cmd-panel>
+      <cmd-panel fxFlex="32%"
+                 *ngIf="!this.aService.isRemoting
+                        && this.checkRecentCommand()
+                        && !this.aService.isBeingRemoted">
+      </cmd-panel>
     </div>
   </div>
-    <!--<mat-divider></mat-divider>-->
-    <footer fxFlex fxFlexLayout.xs="column" fxFlexLayout.gt-xs="row" style="background-color:ghostwhite">
-      <div fxLayoutAlign.xs="space-around" fxLayoutAlign="start" fxFill>
-        <action-btn ActionCode="LEFT" Color="warn"></action-btn>
-        <action-btn ActionCode="MOVE" Color="warn"></action-btn>
-        <action-btn ActionCode="RIGHT" Color="warn"></action-btn>
-        <action-btn ActionCode="PLACE" Color="warn"></action-btn>
-      </div>
-    </footer>
-  </div>
+  <footer fxFlexLayout.xs="column" fxFlexLayout.gt-xs="row" style="background-color:ghostwhite"
+          *ngIf="!this.aService.isBeingRemoted">
+    <div fxLayoutAlign.xs="space-around" fxLayoutAlign="start" fxFill>
+      <action-btn ActionCode="LEFT" Color="warn"></action-btn>
+      <action-btn ActionCode="MOVE" Color="warn"></action-btn>
+      <action-btn ActionCode="RIGHT" Color="warn"></action-btn>
+      <action-btn ActionCode="PLACE" Color="warn"></action-btn>
+    </div>
+  </footer>
+</div>
 
