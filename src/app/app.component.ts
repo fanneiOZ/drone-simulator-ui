@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
+import { SocketService } from './services/SocketService';
+import { ActionService, Action } from './services/ActionService';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app';
+
+  constructor( private wSocket: SocketService
+              ,private aService: ActionService) {
+  }
 }
