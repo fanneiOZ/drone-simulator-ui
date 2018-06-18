@@ -3,13 +3,13 @@
     <appToolBar></appToolBar>
   </div>
   <div fxFlex="85%" fxLayout="column">
-    <mat-toolbar color="accent" *ngIf="this.aService.isRemoting" style="height: 40px;">
+    <mat-toolbar fxFlex="8%" color="accent" *ngIf="this.aService.isRemoting" >
       <h4>&nbsp;Remoting ..<b>{{ this.aService.remotingClientID }}</b></h4>
       <span class="toolbar-spacer"></span>
       <action-btn ActionCode="REMOTE"></action-btn>
       <action-btn ActionCode="STOPREMOTE"></action-btn>
     </mat-toolbar>
-    <div fxLayout="row" fxLayout.xs="column" fxFlexFill>
+    <div fxLayout="row" fxLayout.xs="column" fxFlex>
       <div fxFlex fxFlex.xs style="overflow: auto">
         <msg-list></msg-list>
       </div>
