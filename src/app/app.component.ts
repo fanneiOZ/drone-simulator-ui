@@ -1,10 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, Input, Inject } from '@angular/core'
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+    selector: 'app',
+    templateUrl: './template/app.template.html',
 })
 export class AppComponent {
-  title = 'app';
+    name: string = 'Just test'
 }
