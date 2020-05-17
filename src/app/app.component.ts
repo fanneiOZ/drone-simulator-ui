@@ -1,4 +1,4 @@
-import { Component, Input, Inject } from '@angular/core'
+import { Component } from '@angular/core'
 
 @Component({
     selector: 'app',
@@ -6,4 +6,12 @@ import { Component, Input, Inject } from '@angular/core'
 })
 export class AppComponent {
     name: string = 'Just test'
+    appMessage: string = 'By pass the container message'
+    list: string[] = ['a','b','c','e']
+
+    constructor() {
+      setInterval(() => {
+        this.list.push('auto')
+      }, 5000)
+    }
 }
